@@ -34,28 +34,64 @@ void InitParser(parser* parser)
 	parser->stateLength = 0;
 }
 
-void SendError()
-{
-	unsigned char error;
+void SendError(unsigned char* str)
+{	
+	unsigned char i;
 	word size;
 	word sent;
+	unsigned char string[128];
+	word length;
 	
-	error = '-';
-	size = sizeof(error);
+	for(i = 0; i < 128; i++)
+	{
+		if (str[i] == '\0')
+		{
+			length = i;
+			break;
+		}
+	}
 	
-	AS1_SendBlock(&error, size, &sent);
+	sprintf((char*)string, "-%d:%s", length, str);
+	for(i = 0; i < 128; i++)
+	{
+		if (string[i] == '\0')
+		{
+			size = i;
+			break;
+		}
+	}
+	
+	AS1_SendBlock(string, size, &sent);
 }
 
-void SendSuccess()
+void SendSuccess(unsigned char* str)
 {
-	unsigned char success;
+	unsigned char i;
 	word size;
 	word sent;
+	unsigned char string[128];
+	word length;
 	
-	success = '+';
-	size = sizeof(success);
+	for(i = 0; i < 128; i++)
+	{
+		if (str[i] == '\0')
+		{
+			length = i;
+			break;
+		}
+	}
 	
-	AS1_SendBlock(&success, size, &sent);
+	sprintf((char*)string, "+%d:%s", length, str);
+	for(i = 0; i < 128; i++)
+	{
+		if (string[i] == '\0')
+		{
+			size = i;
+			break;
+		}
+	}
+	
+	AS1_SendBlock(string, size, &sent);
 }
 
 void SendInteger(unsigned int num)

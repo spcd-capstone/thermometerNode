@@ -50,9 +50,9 @@ char GetChar();
 void InitParser(parser* parser);
 void ParseChar(parser* parser, char c);
 
-void SendError();
-void SendSuccess();
-void SendInteger();
+void SendError(unsigned char* str);
+void SendSuccess(unsigned char* str);
+void SendInteger(unsigned int num);
 void SendString(unsigned char* str);
 
 #endif /* UART_H_ */

@@ -90,7 +90,7 @@ int main(void)
 			  }
 			  else
 			  {
-				  SendError();
+				  SendError((unsigned char*)"Key Not Found");
 			  }
 		  }
 		  else if (commandParser.command == PC_SET)
@@ -98,16 +98,16 @@ int main(void)
 			  if ((strcmp("target", commandParser.key) == 0) && (commandParser.dataType == PDT_INTEGER))
 			  {
 				  target = commandParser.dataInt;
-				  SendSuccess();
+				  SendSuccess((unsigned char*)"Key Set Success");
 			  }
 			  else if ((strcmp("name", commandParser.key) == 0) && (commandParser.dataType == PDT_STRING))
 			  {
 				  strcpy(name,commandParser.dataString);
-				  SendSuccess();
+				  SendSuccess((unsigned char*)"Key Set Success");
 			  }
 			  else
 			  {
-				  SendError();
+				  SendError((unsigned char*)"Key Not Found");
 			  }
 		  }
 		  commandParser.state = PS_COMMAND;
